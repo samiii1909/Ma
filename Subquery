@@ -1,0 +1,67 @@
+(
+
+    rollno int NOT NULL,
+
+    name varchar(10) NOT NULL,
+
+    address varchar(20) NOT NULL,
+
+    marks int NOT NULL,
+
+    primary key(rollno)
+
+    );
+
+
+
+INSERT INTO student (`rollno`, `name`, `address`,`marks`) VALUES ('1', 'Abhishek','kopargaon','40'), ('2', 'Akshay', 'shirdi','50'),('3', 'Abhi','kopargaon','70'), ('4', 'Akash', 'rahuri','30'),('5', 'Aman','Aurangabad','80'), ('6', 'Dany', 'Sangamner','75');
+
+
+
+select * from student where marks> 50;
+
+
+
+select name from student where marks>60;
+
+
+
+select avg(marks) from student;
+
+
+
+select name from student where marks>(select avg(marks) from student);
+
+
+
+select * from student where rollno IN( select rollno from student where marks> 50);
+
+
+
+update student set marks=marks*2 where marks>(select avg(marks) from student);
+
+
+
+update student set marks=marks/2 where marks>(select avg(marks) from student);
+
+
+
+delete from student where marks>(select avg(marks) from student);
+
+
+
+CREATE TABLE new_student
+
+(
+
+    rollno int NOT NULL,
+
+    name varchar(10)NOT NULL,
+
+    address varchar(20)NOT NULL,
+
+    marks int NOT NULL,
+
+    primary key(rollno)
+
+    );
