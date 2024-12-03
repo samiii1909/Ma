@@ -1,0 +1,21 @@
+create table student:
+
+id,name,courses
+
+
+
+create table courses:
+
+id,name
+
+
+
+select student.name as s_name, courses.name as c_name from student inner join courses on student.courses=courses.id; 
+
+
+
+select student.name as s_name, courses.name as c_name from student left join courses on student.courses=courses.id; 
+
+
+
+select student.name as s_name, courses.name as c_name from student right join courses on student.courses=courses.id;
