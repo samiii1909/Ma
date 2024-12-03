@@ -1,0 +1,42 @@
+IMPLICIT CURSOR:
+
+
+create table customers(id int primary key,name varchar(22) not null,age int not null,address varchar(22) not null, salary varchar(22) not null);
+
+insert into customers values (1,'AMAR',33,'pune',4000);
+insert into customers values (2,'RAMAN',44,'kopargaon',5000);
+insert into customers values (3,'SANJAY',55,'nashik',6000);
+DECLARE   
+    total_rows NUMBER(2);  
+BEGIN  
+    UPDATE customers  
+    SET salary = salary + 5000;  
+    
+    IF SQL%NOTFOUND THEN  
+        DBMS_OUTPUT.PUT_LINE('No customers updated');  
+    ELSIF SQL%FOUND THEN  
+        total_rows := SQL%ROWCOUNT;  
+        DBMS_OUTPUT.PUT_LINE(total_rows || ' customers updated');  
+    END IF;   
+END;  
+/
+
+*********
+EXPLICIT CURSOR:       DECLARE  
+   c_id customers.id%TYPE;  
+   c_name customers.name%TYPE;  
+   c_addr customers.address%TYPE;  
+   CURSOR c_customers IS  
+      SELECT id, name, address FROM customers;  
+BEGIN  
+   OPEN c_customers;  
+   LOOP  
+      FETCH c_customers INTO c_id, c_name, c_addr;  
+      EXIT WHEN c_customers%NOTFOUND;  
+      DBMS_OUTPUT.PUT_LINE(c_id || ' ' || c_name || ' ' || c_addr);  
+   END LOOP;  
+   CLOSE c_customers;  
+END;  
+/
+
+
