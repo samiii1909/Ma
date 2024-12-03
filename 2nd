@@ -1,0 +1,469 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| department         |
+| ece                |
+| exp11              |
+| geeks              |
+| hostel             |
+| information_schema |
+| mansi              |
+| music_data         |
+| mysql              |
+| new_table          |
+| performance_schema |
+| sys                |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> create database demo;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| demo               |
+| department         |
+| ece                |
+| exp11              |
+| geeks              |
+| hostel             |
+| information_schema |
+| mansi              |
+| music_data         |
+| mysql              |
+| new_table          |
+| performance_schema |
+| sys                |
++--------------------+
+14 rows in set (0.00 sec)
+
+mysql> use demo;
+Database changed
+mysql> create table student(name varchar (30),id int primary key not null,address varchar(30),marks int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into student values('mansi',221,'nagar',55),('rutuja',222,'rahuri',88),('sam',223,'pune',99);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(30) | YES  |     | NULL    |       |
+| id      | int         | NO   | PRI | NULL    |       |
+| address | varchar(30) | YES  |     | NULL    |       |
+| marks   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select*from student;
++--------+-----+---------+-------+
+| name   | id  | address | marks |
++--------+-----+---------+-------+
+| mansi  | 221 | nagar   |    55 |
+| rutuja | 222 | rahuri  |    88 |
+| sam    | 223 | pune    |    99 |
++--------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select name from student;
++--------+
+| name   |
++--------+
+| mansi  |
+| rutuja |
+| sam    |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> select name,id from student;
++--------+-----+
+| name   | id  |
++--------+-----+
+| mansi  | 221 |
+| rutuja | 222 |
+| sam    | 223 |
++--------+-----+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where id=221;
++-------+-----+---------+-------+
+| name  | id  | address | marks |
++-------+-----+---------+-------+
+| mansi | 221 | nagar   |    55 |
++-------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> update student set address='mumbai'where id=222;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from student;
++--------+-----+---------+-------+
+| name   | id  | address | marks |
++--------+-----+---------+-------+
+| mansi  | 221 | nagar   |    55 |
+| rutuja | 222 | mumbai  |    88 |
+| sam    | 223 | pune    |    99 |
++--------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student add phone int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *fron student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fron student' at line 1
+mysql> select *from student;
++--------+-----+---------+-------+-------+
+| name   | id  | address | marks | phone |
++--------+-----+---------+-------+-------+
+| mansi  | 221 | nagar   |    55 |  NULL |
+| rutuja | 222 | mumbai  |    88 |  NULL |
+| sam    | 223 | pune    |    99 |  NULL |
++--------+-----+---------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update student set phone=1234567897 where id=221;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from student;
++--------+-----+---------+-------+------------+
+| name   | id  | address | marks | phone      |
++--------+-----+---------+-------+------------+
+| mansi  | 221 | nagar   |    55 | 1234567897 |
+| rutuja | 222 | mumbai  |    88 |       NULL |
+| sam    | 223 | pune    |    99 |       NULL |
++--------+-----+---------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student modify column name varchar(60);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(60) | YES  |     | NULL    |       |
+| id      | int         | NO   | PRI | NULL    |       |
+| address | varchar(30) | YES  |     | NULL    |       |
+| marks   | int         | YES  |     | NULL    |       |
+| phone   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student drop column phone;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select*fron student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fron student' at line 1
+mysql> select*from student;
++--------+-----+---------+-------+
+| name   | id  | address | marks |
++--------+-----+---------+-------+
+| mansi  | 221 | nagar   |    55 |
+| rutuja | 222 | mumbai  |    88 |
+| sam    | 223 | pune    |    99 |
++--------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> delete from student where name='mansi';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> slect*from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect*from student' at line 1
+mysql> select*from student;
++--------+-----+---------+-------+
+| name   | id  | address | marks |
++--------+-----+---------+-------+
+| rutuja | 222 | mumbai  |    88 |
+| sam    | 223 | pune    |    99 |
++--------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into student values('sayali',225,'sangmaner',66);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from student;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| rutuja | 222 | mumbai    |    88 |
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select sum(marks) from student;
++------------+
+| sum(marks) |
++------------+
+|        253 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(marks) from student;
++------------+
+| avg(marks) |
++------------+
+|    84.3333 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(name) from student;
++-------------+
+| count(name) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select* from student;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| rutuja | 222 | mumbai    |    88 |
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select max(marks) from student;
++------------+
+| max(marks) |
++------------+
+|         99 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks)from student;
++------------+
+| min(marks) |
++------------+
+|         66 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> seelct* from student order by id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seelct* from student order by id' at line 1
+mysql> select* from student order by id;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| rutuja | 222 | mumbai    |    88 |
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student order by marks;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| sayali | 225 | sangmaner |    66 |
+| rutuja | 222 | mumbai    |    88 |
+| sam    | 223 | pune      |    99 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student order by id desc;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| sayali | 225 | sangmaner |    66 |
+| sam    | 223 | pune      |    99 |
+| rutuja | 222 | mumbai    |    88 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student order by id asc;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| rutuja | 222 | mumbai    |    88 |
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student where name like 'r%';
++--------+-----+---------+-------+
+| name   | id  | address | marks |
++--------+-----+---------+-------+
+| rutuja | 222 | mumbai  |    88 |
++--------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> select*from student where name like '%m';
++------+-----+---------+-------+
+| name | id  | address | marks |
++------+-----+---------+-------+
+| sam  | 223 | pune    |    99 |
++------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> select*from student where name like '_a%';
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select*from student where name like '_a%';
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> select*from student where name like '%j_';
++--------+-----+---------+-------+
+| name   | id  | address | marks |
++--------+-----+---------+-------+
+| rutuja | 222 | mumbai  |    88 |
++--------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> select*from student;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| rutuja | 222 | mumbai    |    88 |
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| demo               |
+| department         |
+| ece                |
+| exp11              |
+| geeks              |
+| hostel             |
+| information_schema |
+| mansi              |
+| music_data         |
+| mysql              |
+| new_table          |
+| performance_schema |
+| sys                |
++--------------------+
+14 rows in set (0.00 sec)
+
+mysql> create table employee(id int not null primary key,salary int,code int,name varchar(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into employee values(11,60000,333,'rutuja'),(22,40000,222,'mansi'),(33,40000,333,'mahi');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> slect*from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect*from employee' at line 1
+mysql> select*from employee;
++----+--------+------+--------+
+| id | salary | code | name   |
++----+--------+------+--------+
+| 11 |  60000 |  333 | rutuja |
+| 22 |  40000 |  222 | mansi  |
+| 33 |  40000 |  333 | mahi   |
++----+--------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select* from student;
++--------+-----+-----------+-------+
+| name   | id  | address   | marks |
++--------+-----+-----------+-------+
+| rutuja | 222 | mumbai    |    88 |
+| sam    | 223 | pune      |    99 |
+| sayali | 225 | sangmaner |    66 |
++--------+-----+-----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student inner join employee on student.id=employee.id;
+Empty set (0.00 sec)
+
+mysql> select*from student inner join employee on student.id=employee.code;
++--------+-----+---------+-------+----+--------+------+-------+
+| name   | id  | address | marks | id | salary | code | name  |
++--------+-----+---------+-------+----+--------+------+-------+
+| rutuja | 222 | mumbai  |    88 | 22 |  40000 |  222 | mansi |
++--------+-----+---------+-------+----+--------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select*from student right join employee on student.id=employee.code;
++--------+------+---------+-------+----+--------+------+--------+
+| name   | id   | address | marks | id | salary | code | name   |
++--------+------+---------+-------+----+--------+------+--------+
+| NULL   | NULL | NULL    |  NULL | 11 |  60000 |  333 | rutuja |
+| rutuja |  222 | mumbai  |    88 | 22 |  40000 |  222 | mansi  |
+| NULL   | NULL | NULL    |  NULL | 33 |  40000 |  333 | mahi   |
++--------+------+---------+-------+----+--------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student right join employee on student.id=employee.code;
++--------+------+---------+-------+----+--------+------+--------+
+| name   | id   | address | marks | id | salary | code | name   |
++--------+------+---------+-------+----+--------+------+--------+
+| NULL   | NULL | NULL    |  NULL | 11 |  60000 |  333 | rutuja |
+| rutuja |  222 | mumbai  |    88 | 22 |  40000 |  222 | mansi  |
+| NULL   | NULL | NULL    |  NULL | 33 |  40000 |  333 | mahi   |
++--------+------+---------+-------+----+--------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student left join employee on student.id=employee.code;
++--------+-----+-----------+-------+------+--------+------+-------+
+| name   | id  | address   | marks | id   | salary | code | name  |
++--------+-----+-----------+-------+------+--------+------+-------+
+| rutuja | 222 | mumbai    |    88 |   22 |  40000 |  222 | mansi |
+| sam    | 223 | pune      |    99 | NULL |   NULL | NULL | NULL  |
+| sayali | 225 | sangmaner |    66 | NULL |   NULL | NULL | NULL  |
++--------+-----+-----------+-------+------+--------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student cross join employee;
++--------+-----+-----------+-------+----+--------+------+--------+
+| name   | id  | address   | marks | id | salary | code | name   |
++--------+-----+-----------+-------+----+--------+------+--------+
+| sayali | 225 | sangmaner |    66 | 11 |  60000 |  333 | rutuja |
+| sam    | 223 | pune      |    99 | 11 |  60000 |  333 | rutuja |
+| rutuja | 222 | mumbai    |    88 | 11 |  60000 |  333 | rutuja |
+| sayali | 225 | sangmaner |    66 | 22 |  40000 |  222 | mansi  |
+| sam    | 223 | pune      |    99 | 22 |  40000 |  222 | mansi  |
+| rutuja | 222 | mumbai    |    88 | 22 |  40000 |  222 | mansi  |
+| sayali | 225 | sangmaner |    66 | 33 |  40000 |  333 | mahi   |
+| sam    | 223 | pune      |    99 | 33 |  40000 |  333 | mahi   |
+| rutuja | 222 | mumbai    |    88 | 33 |  40000 |  333 | mahi   |
++--------+-----+-----------+-------+----+--------+------+--------+
+9 rows in set (0.00 sec)
