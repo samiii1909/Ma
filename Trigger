@@ -1,0 +1,40 @@
+insert into customer values (1001, "Chetan", 8000); 
+
+delimiter //
+      create trigger update_cus
+      before update on customer
+      for each row
+      begin
+      insert into mini_statement values (old.acc_no, old.avail_balance);
+      end; // 
+delimiter ;
+
+update customer set avail_balance = avail_balance + 3000 where acc_no = 1001;
+update customer set avail_balance = avail_balance + 3000 where acc_no = 1000; 
+
+select * from customer;
+select *from mini_statement;
+
+==============================
+
+2. After Update Trigger:
+
+create table micro_statement (acc_no integer, 
+                                  avail_balance decimal, 
+            foreign key(acc_no) references customer(acc_no) on delete cascade); 
+
+insert into customer values (1002, "Charan", 4500);
+
+delimiter //
+create trigger update_after
+       after update on customer
+       for each row
+       begin
+       insert into micro_statement values(new.acc_no, new.avail_balance);
+       end; // 
+
+delimiter  ;
+update customer set avail_balance = avail_balance + 1500 where acc_no = 1002; 
+
+select * from customer;
+select *from mini_statement;
