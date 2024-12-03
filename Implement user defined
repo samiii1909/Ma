@@ -1,0 +1,22 @@
+DECLARE
+    v_length NUMBER := 10;
+    v_width NUMBER := 5;
+    v_area NUMBER;
+BEGIN
+    -- Calling the user-defined function
+    v_area := calculate_area(v_length, v_width);
+
+    -- Displaying the result
+    DBMS_OUTPUT.PUT_LINE('The area of the rectangle is: ' || v_area);
+END;
+/
+
+
+
+CREATE OR REPLACE FUNCTION calculate_area (
+    p_length IN NUMBER,  -- Input parameter for length
+    p_width IN NUMBER    -- Input parameter for width
+) RETURN NUMBER IS
+BEGIN
+    RETURN p_length * p_width;  -- Returns the area of the rectangle
+END calculate_area;
