@@ -1,0 +1,46 @@
+show databases;
+
+delimiter //
+
+show tables;
+
+    //
+delimiter;
+
+CREATE PROCEDURE disp()
+
+    
+
+     BEGIN
+
+     select * from user;
+
+    END;
+
+     /
+
+CREATE PROCEDURE search_name(IN inputname long)
+
+           BEGIN
+
+          select * from user where fname=inputname;
+
+          END;
+
+      /
+
+call search_name("Nitin")/
+
+create function addfive(number as int)
+
+returns int
+
+as
+
+begin
+
+return(number+5)
+
+end;
+
+/
